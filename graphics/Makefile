@@ -271,6 +271,7 @@
     SUBDIR += glosm
     SUBDIR += glpng
     SUBDIR += glslang
+    SUBDIR += glsviewer
     SUBDIR += gltt
     SUBDIR += glx-utils
     SUBDIR += gmic
