@@ -1,6 +1,6 @@
---- paranoia/Makefile.in.orig	1999-12-14 04:28:04 UTC
+--- paranoia/Makefile.in.orig	2008-09-04 19:02:47 UTC
 +++ paranoia/Makefile.in
-@@ -24,18 +24,14 @@ OFILES = paranoia.o p_block.o overlap.o 
+@@ -24,17 +24,13 @@ OFILES = paranoia.o p_block.o overlap.o gap.o isort.o 
  LIBS = ../interface/libcdda_interface.a -lm
  export VERSION
  
@@ -16,10 +16,9 @@
 -slib:	
  	$(MAKE) lessmessy
  	$(MAKE) libcdda_paranoia.so CFLAGS="$(OPT) -fpic" 
- 
++
 +debug:
 +	$(MAKE) libcdda_paranoia.a CFLAGS="$(DEBUG)"
-+
+ 
  #test:	$(TFILES)
  #
- 

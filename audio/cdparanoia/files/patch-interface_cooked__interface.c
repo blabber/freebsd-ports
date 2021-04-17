@@ -1,24 +1,24 @@
---- interface/cooked_interface.c.orig	2000-04-19 22:41:04 UTC
+--- interface/cooked_interface.c.orig	2008-08-26 09:55:22 UTC
 +++ interface/cooked_interface.c
 @@ -1,6 +1,8 @@
  /******************************************************************
-  * CopyPolicy: GNU Public License 2 applies
+  * CopyPolicy: GNU Lesser General Public License 2.1 applies
   * Copyright (C) Monty xiphmont@mit.edu
 + * FreeBSD porting (c) 2003
 + * 	Simon 'corecode' Schubert <corecode@corecode.ath.cx>
   *
   * CDROM code specific to the cooked ioctl interface
   *
-@@ -10,6 +12,7 @@
- #include "common_interface.h"
- #include "utils.h"
+@@ -24,6 +26,7 @@ static int timed_ioctl(cdrom_drive *d, int fd, int com
+   return ret2;
+ }
  
 +#ifdef Linux
  static int cooked_readtoc (cdrom_drive *d){
    int i;
    int tracks;
-@@ -129,6 +132,142 @@ static long cooked_read (cdrom_drive *d,
-   return(sectors);
+@@ -157,6 +160,142 @@ static long cooked_read (cdrom_drive *d, void *p, long
+   return ret;
  }
  
 +#elif defined(__FreeBSD__)
@@ -160,7 +160,7 @@
  /* hook */
  static int Dummy (cdrom_drive *d,int Switch){
    return(0);
-@@ -193,6 +332,7 @@ static void check_exceptions(cdrom_drive
+@@ -221,6 +360,7 @@ static void check_exceptions(cdrom_drive *d,exception 
  int cooked_init_drive (cdrom_drive *d){
    int ret;
  
@@ -168,7 +168,7 @@
    switch(d->drive_type){
    case MATSUSHITA_CDROM_MAJOR:	/* sbpcd 1 */
    case MATSUSHITA_CDROM2_MAJOR:	/* sbpcd 2 */
-@@ -243,6 +383,9 @@ int cooked_init_drive (cdrom_drive *d){
+@@ -271,6 +411,9 @@ int cooked_init_drive (cdrom_drive *d){
    default:
      d->nsectors=40; 
    }
@@ -177,4 +177,4 @@
 +#endif
    d->enable_cdda = Dummy;
    d->read_audio = cooked_read;
-   d->set_speed = cooked_setspeed;
+   d->read_toc = cooked_readtoc;
