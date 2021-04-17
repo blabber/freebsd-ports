@@ -757,6 +757,7 @@
     SUBDIR += pmars-sdl
     SUBDIR += poker-eval
     SUBDIR += pokerth
+    SUBDIR += pokerth-devel
     SUBDIR += polyglot
     SUBDIR += pongix
     SUBDIR += ponscripter-07th-mod
